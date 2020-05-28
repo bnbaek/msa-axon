@@ -1,0 +1,45 @@
+POST http://localhost:8080/holder
+Content-Type: application/json
+
+{
+  "holderName": "peng",
+  "phoneNumber": "010-1111-4444",
+  "address": "서울시 펭수",
+  "userId": "user03"
+
+}
+
+###
+POST http://localhost:8080/account
+Content-Type: application/json
+
+{
+  "holderId": "6af8e9ef-ac3f-4aaf-8b7e-88989d3024f8"
+}
+###
+POST http://localhost:8080/deposit
+Content-Type: application/json
+
+{
+  "holderId" : "6af8e9ef-ac3f-4aaf-8b7e-88989d3024f8",
+  "accountId" : "74daecd5-97be-428a-a0d8-32eed79514a6",
+  "amount": 30
+}
+###
+POST http://localhost:8080/withdraw
+Content-Type: application/json
+
+{
+  "holderId" : "2c2097a1-33eb-4284-b315-d13548eeac50",
+  "accountId" : "3182bd1f-3795-4835-8649-09df6d918f3f",
+  "amount": 10
+}
+
+###
+GET http://localhost:8080/lists?holderId=2c2097a1-33eb-4284-b315-d13548eeac50
+Content-Type: application/json
+
+
+###
+POST http://localhost:9090/reset
+Content-Type: application/json
