@@ -32,11 +32,6 @@ public class TransactionController {
   @PostMapping("holder")
   public CompletableFuture<String> createHolder(@RequestBody HolderDto.Base request) throws NoSuchFieldException {
 
-    String accountId = transactionQueryService.getHolderByUserId(request.getUserId());
-    if (accountId != null) {
-      return CompletableFuture.supplyAsync(() -> accountId);
-    }
-
 
     return transactionService.createHolder(request);
   }
