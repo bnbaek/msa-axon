@@ -8,11 +8,14 @@ import net.open.payment.HolderCreationEvent;
 import net.open.payment.WithdrawMoneyEvent;
 import net.open.payment.accountSummary.HolderSummary;
 import net.open.payment.accountSummary.HolderSummaryRepository;
+import net.open.payment.service.AccountDto;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.AllowReplay;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.eventhandling.ResetHandler;
 import org.axonframework.eventhandling.Timestamp;
+import org.axonframework.queryhandling.QueryHandler;
+import org.axonframework.queryhandling.QueryUpdateEmitter;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +39,7 @@ import java.util.NoSuchElementException;
 @EnableRetry
 public class HolderSummaryProjection {
   private final HolderSummaryRepository rep;
+  private final QueryUpdateEmitter queryUpdateEmitter;
 
   @EventHandler
   @AllowReplay
@@ -66,7 +70,6 @@ public class HolderSummaryProjection {
   }
 
 
-
   @EventHandler
   @AllowReplay
   protected void on(WithdrawMoneyEvent event, @Timestamp Instant instant) {
@@ -74,6 +77,9 @@ public class HolderSummaryProjection {
     HolderSummary holderSummary = getHolderSummary(event.getHolderId());
     holderSummary.setTotalBalance(holderSummary.getTotalBalance() - event.getAmount());
     holderSummary.setUpdatedAt(LocalDateTime.ofInstant(instant, ZoneId.of("Asia/Seoul")));
+    queryUpdateEmitter.emit(AccountDto.InfoReq.class
+        , query -> query.getHolderId().equals(event.getHolderId())
+        , holderSummary);
     rep.save(holderSummary);
   }
 
@@ -85,9 +91,13 @@ public class HolderSummaryProjection {
     HolderSummary holderSummary = getHolderSummary(event.getHolderId());
     holderSummary.setTotalBalance(holderSummary.getTotalBalance() + event.getAmount());
     holderSummary.setUpdatedAt(LocalDateTime.ofInstant(instant, ZoneId.of("Asia/Seoul")));
+
+    queryUpdateEmitter.emit(AccountDto.InfoReq.class
+        , query -> query.getHolderId().equals(event.getHolderId())
+        , holderSummary);
+
     rep.save(holderSummary);
   }
-
 
 
   private HolderSummary getHolderSummary(String holderId) {
@@ -97,9 +107,17 @@ public class HolderSummaryProjection {
 
 
   @ResetHandler
-  private void resetHolderAccountInfo(){
+  private void resetHolderAccountInfo() {
     log.debug("reset triggered");
     rep.deleteAll();
   }
+
+  @QueryHandler
+  public HolderSummary on(AccountDto.InfoReq query) {
+    log.debug("HolderSummary halding{}", query);
+    return rep.findByHolderId(query.getHolderId()).orElse(null);
+
+  }
+
 
 }

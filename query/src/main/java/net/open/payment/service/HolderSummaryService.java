@@ -1,9 +1,14 @@
 package net.open.payment.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import net.open.payment.accountSummary.HolderSummary;
 import org.axonframework.config.Configuration;
 import org.axonframework.eventhandling.TrackingEventProcessor;
+import org.axonframework.messaging.responsetypes.ResponseTypes;
+import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 /**
  * Created by BNBAEK
@@ -12,29 +17,10 @@ import org.springframework.stereotype.Service;
  * Date: 2020/05/28
  * Time: 1:53 오후
  */
-@Service
-@RequiredArgsConstructor
-public class HolderSummaryService {
-  private final Configuration configuration;
+public interface HolderSummaryService {
+  void reset();
 
-  public void reset() {
-    configuration.eventProcessingConfiguration()
-        .eventProcessorByProcessingGroup("holderSummaryProjection",
-            TrackingEventProcessor.class)
-        .ifPresent(trackingEventProcessor -> {
-          trackingEventProcessor.shutDown();
-          trackingEventProcessor.resetTokens(); // (1)
-          trackingEventProcessor.start();
-        });
-  }
-  public void set() {
-    configuration.eventProcessingConfiguration()
-        .eventProcessorByProcessingGroup("holderSummaryProjection",
-            TrackingEventProcessor.class)
-        .ifPresent(trackingEventProcessor -> {
-          trackingEventProcessor.shutDown();
-          trackingEventProcessor.resetTokens(); // (1)
-          trackingEventProcessor.start();
-        });
-  }
+  HolderSummary getAccountInfo(String holderId);
+
+  Flux<HolderSummary> getAccountInfoSubsciption(String holderId);
 }
