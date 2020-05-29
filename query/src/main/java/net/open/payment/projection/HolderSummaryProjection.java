@@ -16,7 +16,9 @@ import org.axonframework.eventhandling.ResetHandler;
 import org.axonframework.eventhandling.Timestamp;
 import org.axonframework.queryhandling.QueryHandler;
 import org.axonframework.queryhandling.QueryUpdateEmitter;
+import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 
 
@@ -42,6 +44,7 @@ public class HolderSummaryProjection {
   private final QueryUpdateEmitter queryUpdateEmitter;
 
   @EventHandler
+  @Retryable(value = {NoSuchElementException.class}, maxAttempts = 5, backoff = @Backoff(delay = 1000))
   @AllowReplay
   protected void on(HolderCreationEvent event, @Timestamp Instant instant) {
     log.info("HolderCreationEvent : projecting {} , timestamp : {}", event, instant.toString());
@@ -60,6 +63,7 @@ public class HolderSummaryProjection {
   }
 
   @EventHandler
+  @Retryable(value = {NoSuchElementException.class}, maxAttempts = 5, backoff = @Backoff(delay = 1000))
   @AllowReplay
   protected void on(AccountCreationEvent event, @Timestamp Instant instant) {
     log.info("AccountCreationEvent: projecting {} , timestamp : {}", event, instant.toString());
@@ -71,6 +75,7 @@ public class HolderSummaryProjection {
 
 
   @EventHandler
+  @Retryable(value = {NoSuchElementException.class}, maxAttempts = 5, backoff = @Backoff(delay = 1000))
   @AllowReplay
   protected void on(WithdrawMoneyEvent event, @Timestamp Instant instant) {
     log.info("WithdrawMoneyEvent: projecting {} , timestamp : {}", event, instant.toString());
@@ -85,6 +90,7 @@ public class HolderSummaryProjection {
 
 
   @EventHandler
+  @Retryable(value = {NoSuchElementException.class}, maxAttempts = 5, backoff = @Backoff(delay = 1000))
   @AllowReplay
   protected void on(DepositMoneyEvent event, @Timestamp Instant instant) {
     log.info("DepositMoneyEvent: projecting {} , timestamp : {}", event, instant.toString());
