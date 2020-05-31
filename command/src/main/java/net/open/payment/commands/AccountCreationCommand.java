@@ -16,14 +16,12 @@ import java.util.UUID;
  */
 @Getter
 @ToString
-public class AccountCreationCommand {
-  @TargetAggregateIdentifier
+public class AccountCreationCommand extends BaseCommand<String> {
   private String holderId;
-  private String accountId;
 
   @Builder
-  public AccountCreationCommand(String holderId) {
+  public AccountCreationCommand(String accountId, String holderId) {
+    super(accountId);
     this.holderId = holderId;
-    this.accountId = UUID.randomUUID().toString();
   }
 }

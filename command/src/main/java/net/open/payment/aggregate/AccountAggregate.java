@@ -35,7 +35,7 @@ public class AccountAggregate {
   public AccountAggregate(AccountCreationCommand command) {
     log.debug("handling {}", command);
     apply(AccountCreationEvent.builder()
-        .accountId(command.getAccountId())
+        .accountId(command.getId())
         .holderId(command.getHolderId())
         .build()
     );
@@ -55,7 +55,7 @@ public class AccountAggregate {
     if (command.getAmount() <= 0) throw new IllegalStateException("amount <= 0");
     apply(DepositMoneyEvent.builder()
         .transactionId(command.getTransactionId())
-        .accountId(command.getAccountId())
+        .accountId(command.getId())
         .holderId(command.getHolderId())
         .amount(command.getAmount())
         .type(command.getType())
@@ -76,7 +76,7 @@ public class AccountAggregate {
     if (command.getAmount() <= 0) throw new IllegalStateException("amount <= 0");
     apply(WithdrawMoneyEvent.builder()
         .transactionId(command.getTransactionId())
-        .accountId(command.getAccountId())
+        .accountId(command.getId())
         .holderId(command.getHolderId())
         .amount(command.getAmount())
         .type(command.getType())

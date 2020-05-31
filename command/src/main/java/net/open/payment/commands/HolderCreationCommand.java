@@ -16,17 +16,15 @@ import java.util.UUID;
  */
 @Getter
 @ToString
-public class HolderCreationCommand {
-  @TargetAggregateIdentifier
-  private String holderId;
+public class HolderCreationCommand extends BaseCommand<String> {
   private String holderName;
   private String phoneNumber;
   private String address;
   private String userId;
 
   @Builder
-  public HolderCreationCommand(String holderName, String phoneNumber, String address, String userId) {
-    this.holderId = UUID.randomUUID().toString();
+  public HolderCreationCommand(String holderId, String holderName, String phoneNumber, String address, String userId) {
+    super(holderId);
     this.holderName = holderName;
     this.phoneNumber = phoneNumber;
     this.address = address;

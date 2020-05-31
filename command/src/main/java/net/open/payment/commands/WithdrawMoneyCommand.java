@@ -18,10 +18,7 @@ import java.util.UUID;
  */
 @Getter
 @ToString
-@NoArgsConstructor
-public class WithdrawMoneyCommand {
-  @TargetAggregateIdentifier
-  private String accountId;
+public class WithdrawMoneyCommand extends BaseCommand<String> {
   private String holderId;
   private Long amount;
   private TransactionType type;
@@ -29,10 +26,10 @@ public class WithdrawMoneyCommand {
 
   @Builder
   public WithdrawMoneyCommand(String accountId, String holderId, Long amount) {
-    this.transactionId = UUID.randomUUID().toString();
-    this.accountId = accountId;
+    super(accountId);
     this.holderId = holderId;
     this.amount = amount;
     this.type = TransactionType.WITHDRAW;
+    this.transactionId = UUID.randomUUID().toString();
   }
 }

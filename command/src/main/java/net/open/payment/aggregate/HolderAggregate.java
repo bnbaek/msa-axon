@@ -18,6 +18,7 @@ import static org.axonframework.modelling.command.AggregateLifecycle.apply;
  * Date: 2020/05/26
  * Time: 5:40 오후
  */
+@Getter
 @RequiredArgsConstructor
 @Aggregate
 public class HolderAggregate {
@@ -32,7 +33,7 @@ public class HolderAggregate {
   @CommandHandler
   public HolderAggregate(HolderCreationCommand command) {
     apply(HolderCreationEvent.builder()
-        .holderId(command.getHolderId())
+        .holderId(command.getId())
         .holderName(command.getHolderName())
         .phoneNumber(command.getPhoneNumber())
         .address(command.getAddress())

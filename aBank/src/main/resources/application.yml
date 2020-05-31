@@ -1,0 +1,12 @@
+server:
+  port: 5500
+
+spring:
+  application:
+    name: eventsourcing-cqrs-AppleBank
+
+axon:
+  serializer:
+    general: xstream
+  axonserver:
+    servers: localhost:8124

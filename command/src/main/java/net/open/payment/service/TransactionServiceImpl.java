@@ -12,6 +12,7 @@ import net.open.payment.dto.WithdrawDto;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -30,6 +31,7 @@ public class TransactionServiceImpl implements TransactionService {
   @Override
   public CompletableFuture<String> createHolder(HolderDto.Base holderDto) {
     return commandGateway.send(HolderCreationCommand.builder()
+        .holderId(UUID.randomUUID().toString())
         .holderName(holderDto.getHolderName())
         .address(holderDto.getAddress())
         .phoneNumber(holderDto.getPhoneNumber())
@@ -40,6 +42,7 @@ public class TransactionServiceImpl implements TransactionService {
   @Override
   public CompletableFuture<String> createAccount(AccountDto.Base accountDto) {
     return commandGateway.send(AccountCreationCommand.builder()
+        .accountId(UUID.randomUUID().toString())
         .holderId(accountDto.getHolderId())
         .build());
   }

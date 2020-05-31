@@ -14,15 +14,15 @@ POST http://localhost:8080/account
 Content-Type: application/json
 
 {
-  "holderId": "6af8e9ef-ac3f-4aaf-8b7e-88989d3024f8"
+  "holderId": "3b1444f1-3890-4907-a859-c6a73bfe91e9"
 }
 ###
 POST http://localhost:8080/withdraw
 Content-Type: application/json
 
 {
-  "holderId" : "6af8e9ef-ac3f-4aaf-8b7e-88989d3024f8",
-  "accountId" : "74daecd5-97be-428a-a0d8-32eed79514a6",
+  "holderId" : "78fb83fd-d9de-49d0-81ad-5ca35091b1dd",
+  "accountId" : "488cfae0-dd24-4d18-8fb1-8adcd053d0dc",
   "amount": 2
 }
 
