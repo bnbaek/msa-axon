@@ -11,4 +11,13 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public class TransferComamndFactory {
+  private final AbstractTransferCommand transferCommand;
+
+  public void create(String srcAccountID, String dstAccountID, Long amount, String transferID) {
+    transferCommand.create(srcAccountID, dstAccountID, amount, transferID);
+  }
+
+  public AbstractTransferCommand getTransferCommand() {
+    return this.transferCommand;
+  }
 }

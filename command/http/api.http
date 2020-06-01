@@ -14,20 +14,36 @@ POST http://localhost:8080/account
 Content-Type: application/json
 
 {
-  "holderId": "3b1444f1-3890-4907-a859-c6a73bfe91e9"
+  "holderId": "69077ae7-86ca-4cff-a5b5-5e30fcb3742d"
 }
+
+###
+POST http://localhost:8080/deposit
+Content-Type: application/json
+
+{
+  "holderId" : "69077ae7-86ca-4cff-a5b5-5e30fcb3742d",
+  "accountId" : "925e00d5-b080-4fce-b365-0dac2a8a18e1",
+  "amount": 60
+}
+
+
 ###
 POST http://localhost:8080/withdraw
 Content-Type: application/json
 
 {
-  "holderId" : "78fb83fd-d9de-49d0-81ad-5ca35091b1dd",
-  "accountId" : "488cfae0-dd24-4d18-8fb1-8adcd053d0dc",
-  "amount": 2
+  "holderId" : "6b22a038-16f9-4426-b563-18748d893860",
+  "accountId" : "867bcbde-a4d8-4e9f-b061-0e8cdaf89355",
+  "amount": 9
 }
 
 ###
 GET http://localhost:8080/lists?holderId=2c2097a1-33eb-4284-b315-d13548eeac50
+Content-Type: application/json
+
+###
+GET http://localhost:9090/holders/loan/69077ae7-86ca-4cff-a5b5-5e30fcb3742d
 Content-Type: application/json
 
 

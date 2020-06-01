@@ -1,8 +1,7 @@
 package net.open.payment.commands;
 
 import lombok.*;
-import net.open.payment.TransactionType;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
+import net.open.payment.event.TransactionType;
 
 import java.util.UUID;
 

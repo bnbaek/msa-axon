@@ -2,7 +2,7 @@ package net.open.payment.aggregate;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.open.payment.HolderCreationEvent;
+import net.open.payment.event.HolderCreationEvent;
 import net.open.payment.commands.HolderCreationCommand;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;

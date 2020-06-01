@@ -4,9 +4,25 @@ server:
 spring:
   application:
     name: eventsourcing-cqrs-AppleBank
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/apple
+    username: hello
+    password: 1234
+    jpa:
+      hibernate:
+        ddl-auto: create
 
 axon:
   serializer:
     general: xstream
   axonserver:
     servers: localhost:8124
+
+logging:
+  level:
+    org.hibernate.SQL: info
+    org.hibernate.type: info
+
+logging.level.net.open.payment: debug
+logging.level.org.axonframework: debug

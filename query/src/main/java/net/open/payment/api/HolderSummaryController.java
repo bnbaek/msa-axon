@@ -1,7 +1,7 @@
 package net.open.payment.api;
 
 import lombok.RequiredArgsConstructor;
-import net.open.payment.accountSummary.HolderSummary;
+import net.open.payment.repository.holder.HolderSummary;
 import net.open.payment.service.HolderSummaryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

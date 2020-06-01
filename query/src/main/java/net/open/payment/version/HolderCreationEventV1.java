@@ -1,6 +1,6 @@
 package net.open.payment.version;
 
-import net.open.payment.HolderCreationEvent;
+import net.open.payment.event.HolderCreationEvent;
 import org.axonframework.serialization.SimpleSerializedType;
 import org.axonframework.serialization.upcasting.event.IntermediateEventRepresentation;
 import org.axonframework.serialization.upcasting.event.SingleEventUpcaster;

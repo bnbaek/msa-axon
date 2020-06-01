@@ -1,4 +1,4 @@
-package net.open.payment;
+package net.open.payment.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

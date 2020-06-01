@@ -1,16 +1,13 @@
 package net.open.payment.aggregate;
 
-import net.open.payment.HolderCreationEvent;
+import net.open.payment.event.HolderCreationEvent;
 import net.open.payment.commands.HolderCreationCommand;
 import org.axonframework.test.aggregate.AggregateTestFixture;
 import org.axonframework.test.aggregate.FixtureConfiguration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by iopenu@gmail.com on 2020/05/31

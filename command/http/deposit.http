@@ -3,8 +3,8 @@ POST http://localhost:8080/deposit
 Content-Type: application/json
 
 {
-  "holderId" : "3b1444f1-3890-4907-a859-c6a73bfe91e9",
-  "accountId" : "962bbc13-04aa-4b19-ae88-70c821d0651f",
+  "holderId" : "6b22a038-16f9-4426-b563-18748d893860",
+  "accountId" : "a4c36ce9-2173-4d62-bd81-8a82936af7fe",
   "amount": 30
 }
 

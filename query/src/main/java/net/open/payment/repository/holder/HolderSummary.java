@@ -1,4 +1,4 @@
-package net.open.payment.accountSummary;
+package net.open.payment.repository.holder;
 
 import lombok.*;
 
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  * Time: 11:06 오전
  */
 @Entity
-@Table(name = "ACCOUNT_SUMMARY")
+@Table(name = "HOLDER_SUMMARY")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -27,15 +27,6 @@ public class HolderSummary {
   @Column(name = "holder_id", nullable = false)
   private String holderId;
 
-  @Column(name = "user_id")
-  private String userId;
-
-  @Column(nullable = false)
-  private String name;
-  @Column(nullable = false)
-  private String phoneNumber;
-  @Column
-  private String address;
   @Column(name = "total_balance", nullable = false)
   private Long totalBalance;
   @Column(name = "account_cnt", nullable = false)

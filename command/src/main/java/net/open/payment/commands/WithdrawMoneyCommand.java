@@ -2,10 +2,8 @@ package net.open.payment.commands;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
-import net.open.payment.TransactionType;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
+import net.open.payment.event.TransactionType;
 
 import java.util.UUID;
 

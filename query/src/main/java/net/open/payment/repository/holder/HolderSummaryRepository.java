@@ -1,4 +1,4 @@
-package net.open.payment.accountSummary;
+package net.open.payment.repository.holder;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

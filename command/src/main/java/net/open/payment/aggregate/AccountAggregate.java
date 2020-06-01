@@ -2,12 +2,14 @@ package net.open.payment.aggregate;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.open.payment.AccountCreationEvent;
-import net.open.payment.DepositMoneyEvent;
-import net.open.payment.WithdrawMoneyEvent;
+import net.open.payment.commands.MasterTransferCommand;
+import net.open.payment.event.*;
 import net.open.payment.commands.AccountCreationCommand;
 import net.open.payment.commands.DepositMoneyCommand;
 import net.open.payment.commands.WithdrawMoneyCommand;
+import net.open.payment.event.transfer.MoneyTransferEvent;
+import net.open.payment.event.transfer.TransferApprovedEvent;
+import net.open.payment.event.transfer.TransferDeniedEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -88,6 +90,61 @@ public class AccountAggregate {
     log.debug("applaying {}", event);
     this.balance -= event.getAmount();
     log.info("[balance] {}", this.balance);
+  }
+
+
+  @CommandHandler
+  protected void transferMoney(MoneyTransferCommand command) {
+    log.debug("handling {}", command);
+    apply(MoneyTransferEvent.builder()
+        .srcAccountId(command.getSrcAccountId())
+        .dstAccountId(command.getDstAccountId())
+        .amount(command.getAmount())
+        .comamndFactory(command.getBankType().getCommandFactory(command))
+        .transferId(command.getTransferId())
+        .build());
+  }
+
+  @CommandHandler
+  protected void transferMoney(TransferApprovedCommand command) {
+    log.debug("handling {}", command);
+    apply(new DepositMoneyEvent(command.getTransferId(),this.holderId, command.getAccountId(), command.getAmount(), TransactionType.DEPOSIT));
+    apply(new DepositCompletedEvent(command.getAccountId(), command.getTransferId()));
+  }
+
+
+
+
+  @CommandHandler
+  protected void on(MasterTransferCommand command) throws InterruptedException {
+    log.info("handling {}", command);
+    log.info("balance {}", this.balance);
+    log.info("accountId {}", this.accountId);
+    log.info("holderId {}", this.holderId);
+    if (this.balance < command.getAmount()) {
+      apply(TransferDeniedEvent.builder()
+          .srcAccountId(command.getSrcAccountId())
+          .dstAccountId(command.getDstAccountId())
+          .amount(command.getAmount())
+          .description("잔고가 부족합니다.")
+          .transferId(command.getTransferId())
+          .build()
+      );
+    } else {
+      apply(TransferApprovedEvent.builder()
+          .srcAccountId(command.getSrcAccountId())
+          .dstAccountId(command.getDstAccountId())
+          .amount(command.getAmount())
+          .transferId(command.getTransferId())
+          .build()
+      );
+    }
+
+  }
+
+  @EventSourcingHandler
+  protected void on(TransferApprovedEvent event) {
+    this.balance -= event.getAmount();
   }
 
 //  @CommandHandler

@@ -2,7 +2,7 @@ package net.open.payment.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.open.payment.accountSummary.HolderSummary;
+import net.open.payment.repository.holder.HolderSummary;
 import org.axonframework.config.Configuration;
 import org.axonframework.eventhandling.TrackingEventProcessor;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
