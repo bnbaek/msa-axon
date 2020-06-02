@@ -1,19 +1,17 @@
 package net.open.payment.api;
 
 import lombok.RequiredArgsConstructor;
-import net.open.payment.aggregate.AccountAggregate;
-import net.open.payment.aggregate.HolderAggregate;
 import net.open.payment.dto.AccountDto;
 import net.open.payment.dto.DepositDto;
 import net.open.payment.dto.HolderDto;
 import net.open.payment.dto.WithdrawDto;
-import net.open.payment.service.TransactionQueryService;
-import net.open.payment.service.TransactionService;
+import net.open.payment.service.test.TransactionQueryService;
+import net.open.payment.service.transaction.TransactionService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import javax.validation.Valid;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -27,28 +25,16 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class TransactionController {
   private final TransactionService transactionService;
-  private final TransactionQueryService transactionQueryService;
-
-  @PostMapping("holder")
-  public CompletableFuture<String> createHolder(@RequestBody HolderDto.Base request) throws NoSuchFieldException {
-
-
-    return transactionService.createHolder(request);
-  }
-
-  @PostMapping("account")
-  public CompletableFuture<String> createAccount(@RequestBody AccountDto.Base request) {
-    return transactionService.createAccount(request);
-  }
 
   @PostMapping("deposit")
-  public CompletableFuture<String> deposit(@RequestBody DepositDto request) {
+  public CompletableFuture<String> deposit(@Valid @RequestBody DepositDto request) {
     return transactionService.depositMoney(request);
   }
 
   @PostMapping("withdraw")
-  public CompletableFuture<String> withdraw(@RequestBody WithdrawDto request) {
+  public CompletableFuture<String> withdraw(@Valid @RequestBody WithdrawDto request) {
     return transactionService.withdrawMoney(request);
   }
+
 
 }

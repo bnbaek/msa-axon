@@ -52,12 +52,15 @@ public class TransferManager {
         .amount(event.getAmount())
         .transferId(event.getTransferId())
         .build());
+
   }
 
   @SagaEventHandler(associationProperty = "srcAccountId")
   protected void on(TransferDeniedEvent event) {
     log.info("계좌 이체 실패 : {}", event);
     log.info("실패 사유 : {}", event.getDescription());
+
+    //로그이벤트 추가
     SagaLifecycle.end();
   }
 
@@ -65,6 +68,7 @@ public class TransferManager {
   @EndSaga
   protected void on(DepositCompletedEvent event) {
     log.info("계좌 이체 성공 : {}", event);
+    //로그이벤트 추가
   }
 
 }

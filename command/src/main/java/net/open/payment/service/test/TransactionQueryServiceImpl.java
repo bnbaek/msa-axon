@@ -1,15 +1,11 @@
-package net.open.payment.service;
+package net.open.payment.service.test;
 
 import lombok.RequiredArgsConstructor;
-import net.open.payment.aggregate.AccountAggregate;
-import net.open.payment.aggregate.HolderAggregate;
-import net.open.payment.dto.HolderDto;
 import org.axonframework.eventsourcing.eventstore.EventStore;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -20,6 +16,10 @@ import java.util.stream.Collectors;
  * Time: 4:05 오후
  */
 
+/**
+ * 추후 사용가능한지 확인
+ * eventStore에 쿼리를 해본다.
+ */
 @Service
 @RequiredArgsConstructor
 public class TransactionQueryServiceImpl implements TransactionQueryService {

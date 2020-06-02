@@ -2,6 +2,7 @@ package net.open.payment.repository.account;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
  * Time: 2:29 오후
  */
 
+@Getter
 @Entity
 @Table(name = "ACCOUNT_SUMMARY")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

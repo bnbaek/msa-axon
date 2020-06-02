@@ -15,6 +15,6 @@ import lombok.ToString;
 @ToString
 @Getter
 public class DepositCompletedEvent {
-  private String accountID;
-  private String transferID;
+  private String accountId;
+  private String transferId;
 }

@@ -58,6 +58,7 @@ public class AccountAppleAggregate {
           .description("잔고가 부족합니다.")
           .transferId(command.getTransferId())
           .build());
+
     } else {
       apply(TransferApprovedEvent.builder()
           .srcAccountId(command.getSrcAccountId())

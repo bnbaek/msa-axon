@@ -42,7 +42,6 @@ public class MoneyTransferCommand {
       factory.create(command.getSrcAccountId(), command.getDstAccountId(), command.amount, command.getTransferId());
       return factory;
     }
-
   }
 
   public static MoneyTransferCommand of(TransferDto dto) {

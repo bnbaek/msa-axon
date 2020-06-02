@@ -1,4 +1,4 @@
-package net.open.payment.service;
+package net.open.payment.service.test;
 
 import java.util.List;
 
@@ -8,6 +8,10 @@ import java.util.List;
  * User: dean
  * Date: 2020/05/28
  * Time: 4:04 오후
+ */
+
+/**
+ * 테스트한것 비지니스 로직과 무관.
  */
 public interface TransactionQueryService {
 

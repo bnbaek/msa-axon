@@ -27,7 +27,6 @@ import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 
-
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -174,6 +173,11 @@ public class HolderSummaryProjection {
     holderSummaryRepository.save(holderSummary);
   }
 
+
+  private Account getHolder(String accountId) {
+    return accountRepository.findByAccountId(accountId)
+        .orElseThrow(() -> new NoSuchElementException("계좌가 존재하지 않습니다."));
+  }
 
   private HolderSummary getHolderSummary(String holderId) {
     return holderSummaryRepository.findByHolderId(holderId)

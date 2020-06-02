@@ -23,11 +23,11 @@ public class WithdrawMoneyCommand extends BaseCommand<String> {
   private String transactionId;
 
   @Builder
-  public WithdrawMoneyCommand(String accountId, String holderId, Long amount) {
+  public WithdrawMoneyCommand(String accountId, String holderId, Long amount, String transactionId) {
     super(accountId);
     this.holderId = holderId;
     this.amount = amount;
     this.type = TransactionType.WITHDRAW;
-    this.transactionId = UUID.randomUUID().toString();
+    this.transactionId = transactionId;
   }
 }

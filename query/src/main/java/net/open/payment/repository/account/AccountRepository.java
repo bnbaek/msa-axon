@@ -1,6 +1,9 @@
 package net.open.payment.repository.account;
 
+import net.open.payment.repository.holder.Holder;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
 
 /**
  * Created by BNBAEK
@@ -10,4 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Time: 2:29 오후
  */
 public interface AccountRepository extends JpaRepository<Account, String> {
+  Optional<Account> findByAccountId(String accountId);
 }

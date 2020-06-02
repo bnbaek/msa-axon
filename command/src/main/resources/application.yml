@@ -19,12 +19,8 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
-    show-sql: true
+#    show-sql: true
 
-logging:
-  level:
-    org.hibernate.SQL: info
-    org.hibernate.type: info
 
 axon:
   serializer:
@@ -32,5 +28,12 @@ axon:
   axonserver:
     servers: localhost:8124
 
+
+
 logging.level.net.open.payment: debug
 logging.level.org.axonframework: debug
+#logging.level.org.hibernate.type.descriptor.sql: trace
+#logging:
+#  level:
+#    org.hibernate.SQL: info
+#    org.hibernate.type: info

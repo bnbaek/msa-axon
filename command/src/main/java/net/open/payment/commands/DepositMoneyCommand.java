@@ -22,11 +22,11 @@ public class DepositMoneyCommand extends BaseCommand<String> {
 
 
   @Builder
-  public DepositMoneyCommand( String accountId, String holderId, Long amount) {
+  public DepositMoneyCommand(String accountId,String transactionId, String holderId, Long amount) {
     super(accountId);
     this.holderId = holderId;
     this.amount = amount;
-    this.transactionId = UUID.randomUUID().toString();
+    this.transactionId = transactionId;
     this.type = TransactionType.DEPOSIT;
   }
 }
